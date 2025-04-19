@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="Weather_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="app-title">🌦 Weather App</h1>
+        <div class="intro">
+            <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Weather Icon" class="intro-icon">
+            <p>Get real-time weather updates for any city in the world!</p>
+        </div>
+        <div class="search-box">
+            <input type="text" id="location" placeholder="Enter city name...">
+            <button onclick="getWeather()">🔍</button>
+        </div>
+        <div id="weather-info" class="hidden">
+            <h2 id="city"></h2>
+            <img id="weather-icon" alt="Weather Icon" class="weather-icon">
+            <p id="temperature"></p>
+            <p id="condition"></p>
+            <p id="humidity"></p>
+            <p id="wind-speed"></p>
+        </div>
+    </div>
+    <script>
+        async function getWeather() {
+            const location = document.getElementById('location').value.trim();
+            if (!location) {
+                alert('Please enter a location');
+                return;
+            }
+            
+            const apiKey = '5e61093cf3644246a90130332250404';
+            const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Weather data not found');
+                }
+                const data = await response.json();
+                
+                document.getElementById('city').textContent = `${data.location.name}, ${data.location.country}`;
+                document.getElementById('temperature').textContent = `🌡 Temperature: ${data.current.temp_c}°C`;
+                document.getElementById('condition').textContent = `🌤 Condition: ${data.current.condition.text}`;
+                document.getElementById('humidity').textContent = `💧 Humidity: ${data.current.humidity}%`;
+                document.getElementById('wind-speed').textContent = `💨 Wind Speed: ${data.current.wind_kph} kph`;
+                document.getElementById('weather-icon').src = `https:${data.current.condition.icon}`;
+                document.getElementById('weather-icon').alt = data.current.condition.text;
+                
+                document.querySelector('.intro').classList.add('hidden');
+                document.getElementById('weather-info').classList.remove('hidden');
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+<!-- This is Explaination of the Weather App Project -->
+ 
+ <!-- "I developed a weather application using HTML, CSS, and JavaScript that fetches real-time weather data from the WeatherAPI. The app allows users to enter any city name and view live weather information including temperature, humidity, condition, and wind speed. I used asynchronous JavaScript (async/await) to handle API calls smoothly.
+To enhance the user experience, I designed a responsive and interactive UI with a welcoming intro section, weather icons, and smooth transitions. 
+This project helped me understand how to work with external APIs, handle JSON data, and design user-friendly front-end applications. It also improved my debugging skills in JavaScript." -->

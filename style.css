@@ -1,41 +1,59 @@
+/* Basic Mobile View */
 body {
-    background-color: #f0f0f0; /* Background color update */
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
 }
 
-h1 {
-    font-size: 2rem; /* Font size */
+.container {
+    max-width: 100%;
+    padding: 15px;
+}
+
+header {
     text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #4CAF50;
+    padding: 20px;
+    background-color: #007bff;
     color: white;
 }
 
-@media (max-width: 768px) {
-    /* Mobile responsiveness */
-    body {
-        background-color: #fff;
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* For Mobile Devices */
+@media (max-width: 767px) {
+    header {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
     }
 
     h1 {
-        font-size: 1.5rem; /* Smaller font size for smaller screens */
+        font-size: 1.5em;
+    }
+}
+
+/* For Tablets and Small Screens */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
     }
 
-    table {
-        font-size: 0.8rem; /* Smaller table text for mobile */
+    button {
+        padding: 12px 25px;
     }
 }
